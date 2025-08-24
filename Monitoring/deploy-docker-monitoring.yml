@@ -1,0 +1,23 @@
+---
+- name: Simple Docker deployment
+  hosts: monitoring
+  become: yes
+  gather_facts: no
+  
+  tasks:
+    - name: Install Docker using convenience script
+      shell: |
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sudo sh get-docker.sh
+        sudo usermod -aG docker $USER
+
+    - name: Run Loki container
+      shell: |
+        sudo docker run -d --name=loki -p 3100:3100 grafana/loki:2.9.0
+
+    - name: Run Grafana container
+      shell: |
+        sudo docker run -d --name=grafana -p 3000:3000 \
+          -e GF_SECURITY_ADMIN_PASSWORD=admin \
+          -e GF_SECURITY_ADMIN_USER=admin \
+          grafana/grafana:10.2.0
