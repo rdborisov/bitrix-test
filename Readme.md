@@ -50,5 +50,5 @@ wget https://www.1c-bitrix.ru/download/portal/bitrix24_enterprise_postgresql_enc
 tar -xvzf bitrix24_enterprise_postgresql_encode.tar.gz
 
 ```
-
 ![alt text](screenshots/image.png)
+![alt text](screenshots/image2.png)
