@@ -43,7 +43,10 @@ https://github.com/bitrix-tools/env-docker/issues/3#issuecomment-3034974273
 
 
 Для загрузки версии установщика выполнить на контейнере bitrix_php
-#	@docker compose exec --user=bitrix php sh
-#	@cd /opt/www/
-#	@wget https://www.1c-bitrix.ru/download/portal/bitrix24_enterprise_postgresql_encode.tar.gz
-#	@tar -xvzf bitrix24_enterprise_postgresql_encode.tar.gz
+```
+docker compose exec --user=bitrix php sh
+cd /opt/www/
+wget https://www.1c-bitrix.ru/download/portal/bitrix24_enterprise_postgresql_encode.tar.gz
+tar -xvzf bitrix24_enterprise_postgresql_encode.tar.gz
+
+```
