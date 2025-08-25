@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-
   # Loki для сбора логов
   loki:
     image: grafana/loki:2.6.1
@@ -10,12 +9,11 @@ services:
     command: -config.file=/etc/loki/local-config.yaml
     volumes:
       - loki_data:/loki
-      - ./config/loki:/etc/loki
     networks:
       - monitor-overlay
     deploy:
       placement:
-        constraints: [node.role == manager]
+        constraints: [node.role != manager]
       replicas: 1
 
   # Promtail для отправки логов в Loki
@@ -24,13 +22,13 @@ services:
     volumes:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./config/promtail:/etc/promtail
-      - ./logs:/var/log
-    command: -config.file=/etc/promtail/config.yml
+    command: -config.file=/etc/loki/config/promtail.yaml
     networks:
       - monitor-overlay
     deploy:
-      mode: global
+      placement:
+        constraints: [node.role != manager]
+      replicas: 1
 
   # Grafana для визуализации
   grafana:
@@ -41,23 +39,17 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./config/grafana:/etc/grafana/provisioning
     networks:
       - monitor-overlay
-    depends_on:
-      - loki
     deploy:
       placement:
-        constraints: [node.role == manager]
+        constraints: [node.role != manager]
       replicas: 1
 
 volumes:
   loki_data:
-    driver: local
   grafana_data:
-    driver: local
 
 networks:
   monitor-overlay:
     driver: overlay
-    attachable: true

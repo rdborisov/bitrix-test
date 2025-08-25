@@ -31,7 +31,7 @@ services:
 #    ports:
 #      - "11211:11211"
     init: true
-    cgroup: host
+    #cgroup: host
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -61,7 +61,7 @@ services:
       - redis_data:/data
       - ./confs/redis/redis.conf:/usr/local/etc/redis/redis.conf
     init: true
-    cgroup: host
+#    cgroup: host
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -94,7 +94,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     init: true
-    cgroup: host
+#   cgroup: host
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -137,7 +137,7 @@ services:
       - geoip2_data:/opt/geoip2/
       - ssl_data:/ssl/
     init: true
-    cgroup: host
+#    cgroup: host
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -167,7 +167,7 @@ services:
       - bxtemp_data:/opt/.bx_temp/
       - ssl_data:/ssl/
     init: true
-    cgroup: host
+#   cgroup: host
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -201,7 +201,7 @@ services:
 #    ports:
 #      - "8010:8010"
     init: true
-    cgroup: host
+#    cgroup: host
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -232,7 +232,7 @@ services:
 #    ports:
 #      - "9010:9010"
     init: true
-    cgroup: host
+#    cgroup: host
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -263,7 +263,7 @@ services:
     volumes:
       - ./confs/sphinx/sphinx.conf:/opt/sphinx/conf/sphinx.conf
     init: true
-    cgroup: host
+#   cgroup: host
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -293,15 +293,13 @@ services:
 #      - "9001:9000"
     volumes:
       - ./confs/php82/etc/:/usr/local/etc/
-      #- ./confs/php83/etc/:/usr/local/etc/
-      #- ./confs/php84/etc/:/usr/local/etc/
       - www_data:/opt/www/
       - bxtemp_data:/opt/.bx_temp/
       - msmtp_data:/opt/msmtp/
       - browscap_data:/opt/browscap/
       - geoip2_data:/opt/geoip2/
     init: true
-    cgroup: host
+#   cgroup: host
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -333,7 +331,7 @@ services:
     volumes:
       - ssl_data:/ssl/
     init: true
-    cgroup: host
+#    cgroup: host
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -368,7 +366,7 @@ services:
     volumes:
       - ssl_data:/ssl/
     init: true
-    cgroup: host
+#   cgroup: host
     security_opt:
       - no-new-privileges
     cap_drop:
@@ -388,7 +386,3 @@ networks:
     driver: overlay
     attachable: true
     internal: false
-    ipam:
-      driver: default
-      config:
-        - subnet:: 10.0.2.0/24
