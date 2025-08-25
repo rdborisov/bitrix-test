@@ -36,6 +36,21 @@ docker swarm join --token SWMTKN-1-27w2t1x3i7apeqor342mqze5jobd8rujeudq2ou1luxs-
 ```
 
 
+Для развертывания сервисов bitrix24 можно использовать команду
+```
+make deploy
+```
+Она выполняет 
+```
+docker stack deploy --compose-file ./env-docker/docker-compose.yml bitrix24
+```
+Файл ./env-docker/docker-compose.yml - слегка видоизмененный файл из [официального репозитория bitrix](https://github.com/bitrix-tools/env-docker)
+
+Для развертывания сервисов мониторинга можно использовать команду
+```
+make monitor
+```
+
 Обычные редакции битрикса не работают с psql 
 https://github.com/bitrix-tools/env-docker/issues/3#issuecomment-3034974273
 Судя по комменту требуется версия "Энтерпрайз для Постгрес"
@@ -57,3 +72,8 @@ tar -xvzf bitrix24_enterprise_postgresql_encode.tar.gz
 Текущий вид работающих контейнеров в менеджере и воркерах
 
 ![alt text](screenshots/image2.png)
+
+
+Система мониторинга Loki + Promtail + Grafana, развернута в тех же воркерах что и сами микросервисы bitrix
+Настроить сбор логов через Loki и Promtail мне не удалось
+
