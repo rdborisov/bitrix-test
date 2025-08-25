@@ -3,7 +3,15 @@
 .PHONY: init deploy monitor scale-down clean help
 init:
 	@echo "Инициализация Docker Swarm..."
-	@docker swarm init --advertise-addr $(shell hostname -i)
+	@docker swarm init
+
+deploy:
+	@echo "Развертывание основных сервисов Bitrix24..."
+	@docker stack deploy --compose-file docker-compose.yml bitrix24
+#	@docker compose exec --user=bitrix php sh
+#	@cd /opt/www/
+#	@wget https://www.1c-bitrix.ru/download/portal/bitrix24_enterprise_postgresql_encode.tar.gz
+#	@tar -xvzf bitrix24_enterprise_postgresql_encode.tar.gz
 
 monitoring-delpoy:
 	@touch docker-setup.sh
