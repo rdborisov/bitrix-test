@@ -30,11 +30,6 @@ clean:
 	@docker system prune -af --volumes
 	@docker network rm bitrix-overlay monitor-overlay 2>/dev/null || true
 
-monitoring-delpoy:
-	@touch docker-setup.sh
-	@sudo chmod +x docker-setup.sh
-	@ssh-copy-id ruslan@192.168.0.63
-	@sudo mkdir /etc/ansible
-	@touch /etc/ansible/hosts
-	@cat ansible/hosts > /etc/ansible/hosts
-	@ansible-playbook deploy-docker.yml --ask-become-pass
+monitor: networks
+	@echo "Развертывание системы мониторинга..."
+	@docker stack deploy -c ./monitoring/docker-compose.yml monitor
