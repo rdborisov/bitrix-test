@@ -57,9 +57,17 @@ https://github.com/bitrix-tools/env-docker/issues/3#issuecomment-3034974273
 [Ссылка на Bitrix Enterprise для работы с postgresql](https://www.1c-bitrix.ru/download/portal/bitrix24_enterprise_postgresql_encode.tar.gz)
 
 
-Для загрузки версии установщика выполнить на контейнере bitrix_php
+Для загрузки версии установщика нужно выполнить на контейнере bitrix_php следующие команды
+подключался через com.docker.swarm.task.name он указан в Portainer
+после подключения следует перейти в дирректорию /opt/www/
+скачать архив установщика и разорхивировать его
+После этого можно установить bitrix через веб интерфейс доступный по адресу 
 ```
-docker compose exec --user=bitrix php sh
+192.168.0.136:8588
+```
+
+```
+docker exec -it --user=bitrix bitrix24_php.1.vu5o7tkopbh4g4u9fabjggbda sh 
 cd /opt/www/
 wget https://www.1c-bitrix.ru/download/portal/bitrix24_enterprise_postgresql_encode.tar.gz
 tar -xvzf bitrix24_enterprise_postgresql_encode.tar.gz
